@@ -1,0 +1,16 @@
+{
+  "runtimeOptions": {
+    "additionalProbingPaths": [
+<<<<<<< HEAD
+      "C:\\Users\\nauma\\.dotnet\\store\\|arch|\\|tfm|",
+      "C:\\Users\\nauma\\.nuget\\packages",
+      "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
+=======
+      "C:\\Users\\VINKOS\\.dotnet\\store\\|arch|\\|tfm|",
+      "C:\\Users\\VINKOS\\.nuget\\packages",
+      "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages",
+      "C:\\Program Files (x86)\\Microsoft\\Xamarin\\NuGet"
+>>>>>>> 2f7fd0a50208aa0c842bf8f425ec758bc1d3e65b
+    ]
+  }
+}

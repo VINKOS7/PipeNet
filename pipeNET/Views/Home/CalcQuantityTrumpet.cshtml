@@ -1,0 +1,51 @@
+﻿@{
+    ViewData["Title"] = "Privacy Policy";
+}
+
+<div class="container-fluid">
+    <div class="row justify-content-center">
+        <div class="tab-content col-20 text-center">
+            <div class="tab-pane active" id="home" role="tabpanel" aria-labelledby="home-tab">
+                <div id="input-form">
+                    <span>КАЛЬКУЛЯТОР ТРУБ</span>
+                    <div class="input-group mt-1">
+                        <img style="width: 100%" src="/Files/@(User.Identity.Name + ".bmp")" alt="..." class="img-thumbnail">
+                    </div>
+                </div>
+                <form class="col" asp-action="AddFile" asp-controller="Home" method="post" enctype="multipart/form-data">
+                    <div class="row">
+                        <input id="@(User.Identity.Name + ".bmp")" value="image" style="width: 100%" class="btn btn-light mt-2" type="file" name="uploadedFile" /><br>
+                        <div style="width: 100%" class="text-center m-3">
+                            <a id="@(User.Identity.Name)" style="width: 100%" class="btn btn-success pl-5 pr-5 pb-3" data-toggle="tab" href="#success" role="tab"
+                               aria-controls="middle" aria-selected="false">Далее</a>
+                        </div>
+                    </div>
+                </form>
+            </div>
+            <div class="tab-pane" id="success" role="tabpanel" aria-labelledby="success-tab">
+                <span id="result"></span>
+                <div id="input-form">
+                    <span>ГОТОВО</span>
+                    <div class="input-group mt-1">
+                        <img style="width: 100%" id="LiveImg" src="/Files/@(User.Identity.Name + "mod3.bmp")" alt="..." class="img-thumbnail">
+                        <script>
+                            var myImg = document.getElementById("LiveImg");
+                            if (myImg) {
+                                window.setInterval(function () {
+                                    myImg.src = myImg.src.replace(/\?.*$/, '?' + Math.random());
+                                }, 3000);
+                            }
+                        </script>
+                    </div>
+                    <div class="text-center mt-3">
+                        <a id="restart" class="btn btn-success pl-5 pr-5" data-toggle="tab" href="#home" role="tab"
+                           aria-controls="home" aria-selected="false">Заново</a>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+</div>
+
+<script src="~/js/CalcQuantityTrumpet.js"></script>

@@ -1,0 +1,47 @@
+﻿@model RegisterViewModel
+@{
+    ViewData["Title"] = "Регистрация";
+}
+
+
+<form class="login" method="post" asp-controller="Account" asp-action="Register">
+    <div class="error" asp-validation-summary="All"></div>
+    <div>
+        <label for="number" asp-for="PhoneNumber">Номер:</label>
+        <input type="text" id="NameFirst" asp-for="PhoneNumber">
+        <span class="error" asp-validation-for="PhoneNumber"></span>
+    </div>
+
+    <div>
+        <label for="nameF" asp-for="UserName">ФИО:</label>
+        <input type="text" id="NameFirst" asp-for="UserName">
+        <span class="error" asp-validation-for="UserName"></span>
+    </div>
+
+    <div>
+        <label for="login" asp-for="Email">Email:</label>
+        <input type="text" id="login" asp-for="Email">
+        <span class="error" asp-validation-for="Email"></span>
+    </div>
+
+    <div>
+        <label for="password" asp-for="Password">Пароль:</label>
+        <input type="password" id="password" asp-for="Password">
+        <span class="error" asp-validation-for="Password"></span>
+    </div>
+
+    <div>
+        <label for="confirm" asp-for="PasswordConfirm">Повторите:</label>
+        <input type="password" id="confirm" asp-for="PasswordConfirm">
+        <span class="error" asp-validation-for="PasswordConfirm"></span>
+    </div>
+
+    <p class="login-submit">
+        <button type="submit" class="login-button">Регистрация</button>
+    </p>
+
+    <p class="forgot-password">
+        <a asp-controller="Account" asp-action="ForgotPassword">Забыл пароль?</a>
+        <a asp-controller="Account" asp-action="Login">Есть Аккаунт?</a>
+    </p>
+</form>

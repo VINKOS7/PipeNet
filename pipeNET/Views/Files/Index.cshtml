@@ -1,0 +1,9 @@
+﻿@model FilesViewModel
+@{
+    ViewData["Title"] = "Files Page";
+}
+
+@foreach (var item in Model.Files)
+{
+    <p class="text-center text-light">@item</p>
+}

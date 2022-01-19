@@ -1,0 +1,35 @@
+﻿@{
+    ViewData["Title"] = "Privacy Policy";
+}
+
+<div class="container-fluid">
+    <div class="text-center">
+        <h4>Здесь вы можете определить часть речи слова, пока лучшая точнось определения (около 80%) только если вводить в иминительном падеже и единственном числе</h4>
+    </div>
+    <div class="row justify-content-center">
+        <div class="tab-content col-5 text-center">
+            <div class="tab-pane active" id="home" role="tabpanel" aria-labelledby="home-tab">
+                <div id="input-form">
+                    <span>Введите слово</span>
+                    <div class="input-group mt-2">
+                        <input id="text-input" type="text" class="form-control">
+                    </div>
+                </div>
+                <div class="text-center mt-3">
+                    <a class="btn btn-success pl-5 pr-5" data-toggle="tab" href="#success" role="tab"
+                       aria-controls="middle" aria-selected="false">Далее</a>
+                </div>
+            </div>
+            <div class="tab-pane" id="success" role="tabpanel" aria-labelledby="success-tab">
+                <a id="repeat" class="collapse" data-toggle="tab" href="#home" role="tab" aria-controls="repeat" aria-selected="false"></a>
+                <span id="result"></span>
+                <div class="text-center mt-3">
+                    <a class="btn btn-success pl-5 pr-5" data-toggle="tab" href="#home" role="tab"
+                       aria-controls="home" aria-selected="false">Заново</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script src="~/js/CalcTypeWord.js"></script>

@@ -1,0 +1,13 @@
+is_global = true
+build_property.TargetFramework = net5.0
+build_property.TargetPlatformMinVersion = 
+build_property.UsingMicrosoftNETSdkWeb = true
+build_property.ProjectTypeGuids = 
+build_property.PublishSingleFile = 
+build_property.IncludeAllContentForSelfExtract = 
+build_property._SupportedPlatformList = Android,iOS,Linux,macOS,Windows
+<<<<<<< HEAD
+build_property.RootNamespace = pipeNET
+build_property.ProjectDir = C:\Users\nauma\OneDrive\Рабочий стол\pipeNET\pipeNET\
+=======
+>>>>>>> 2f7fd0a50208aa0c842bf8f425ec758bc1d3e65b

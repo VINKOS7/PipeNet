@@ -1,0 +1,165 @@
+﻿@using SpeechNet.Services;
+@using SpeechNet.Controllers;
+
+@{
+
+    ViewData["Name"] = User.Identity.Name;
+    ViewData["Email"] = HomeController.dbGET(User.Identity.Name);
+    ViewData["Number"] = HomeController.dbGET(User.Identity.Name, 9);
+    string role = HomeController.dbGET(User.Identity.Name, 3, "check");
+}
+
+@if (role == "def")
+{
+    <h1>@ViewData["Name"]</h1>
+    <h1>@ViewData["Email"]</h1>
+    <h1>@ViewData["Number"]</h1>
+
+    <h1>Здесь локальная информация пользователя</h1>
+}
+else
+{
+    ViewData["Role"] = role;
+    <h1>@ViewData["Name"] роль: @ViewData["Role"]</h1>
+    <h1>@ViewData["Email"]</h1>
+    <h1>@ViewData["Number"]</h1>
+
+    <h1>Здесь локальная информация админа</h1>
+
+    <li><a class="bg-dark dropdown-item text-light" asp-controller="Home" asp-action="PageCreator">Редактор страниц</a></li>
+
+
+    int idxStart = 0;
+
+    string rolelocal = role;
+
+    while (HomeController.dbGET("admin", 1, "def", 0, idxStart) != "def")
+    {
+        string name = HomeController.dbGET("admin", 1, "def", 0, idxStart);
+        ViewData["Name"] = name;
+
+        role = HomeController.dbGET(name, 3, "check");
+
+        ViewData["Role"] = role;
+
+        if (GetPriorityRole.GetP(rolelocal) < GetPriorityRole.GetP(role))
+        {
+            ViewData["Email"] = HomeController.dbGET("admin", 3, "def", 0, idxStart);
+            ViewData["Number"] = HomeController.dbGET("admin", 9, "def", 0, idxStart);
+        }
+        else
+        {
+            ViewData["Email"] = "Не достаточно прав";
+            ViewData["Number"] = "Не достаточно прав";
+        }
+
+
+        if (User.Identity.Name != name)
+        {
+            <div class="card">
+                <div class="card-body text-black-50">
+                    <h5>@ViewData["Name"] роль: @ViewData["Role"]</h5>
+                    <h5>@ViewData["Email"]</h5>
+                    <h5>@ViewData["Number"]</h5>
+                </div>
+                <div>
+                    <nav class="navbar navbar-form navbar-expand-md navbar-toggleable-md navbar-light bg-white border-bottom box-shadow mb-3">
+                        <div class="container">
+                            <!--<a class="navbar-brand" asp-area="" asp-controller="Home" asp-action="Index">Управление пользователем</a>-->
+                            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#@ViewData["Name"]" aria-controls="navbarSupportedContent"
+                                    aria-expanded="false" aria-label="Toggle navigation">
+                                <span class="navbar-toggler-icon"></span>
+                                <h6 class="onestr text-left">Управление пользователем</h6>
+                            </button>
+                            <div id="@ViewData["Name"]" class="navbar-collapse collapse d-md-inline-flex justify-content-between">
+                                <ul class="navbar-nav flex-grow-1">
+                                    @if (GetPriorityRole.GetP(rolelocal) < GetPriorityRole.GetP(role))
+                                    {
+                                        <li>
+                                            <button id="@ViewData["Name"]" class="btn btn-outline-danger" name="del" type="submit">Удалить</button>
+                                        </li>
+
+                                        if (role != "ban")
+                                        {
+                                            <li>
+                                                <button id="@ViewData["Name"]" class="btn btn-outline-danger" name="ban" type="submit">Забанить</button>
+                                            </li>
+                                        }
+                                        else
+                                        {
+                                            <li>
+                                                <button id="@ViewData["Name"]" class="btn btn-outline-danger" name="def" type="submit">Разбанить</button>
+                                            </li>
+                                        }
+                                    }
+                                    <li class="nav-item dropdown">
+                                        <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#">
+                                            Управление ролью
+                                        </a>
+                                        <ul class="dropdown-menu">
+                                            @if (GetPriorityRole.GetP(rolelocal) < GetPriorityRole.GetP(role))
+                                            {
+
+                                                if (GetPriorityRole.GetP(role, null) == true)
+                                                {
+                                                    <li>
+                                                        <button id="@ViewData["Name"]" class="btn btn-warning" value="del" type="submit">Понизить до обычного пользователя @ViewData["Name"]</button>
+                                                    </li>
+                                                }
+
+                                                if (GetPriorityRole.GetP("adminGENERAL", role, rolelocal))
+                                                {
+                                                    <li>
+                                                        <button id="@ViewData["Name"]" class="btn btn-success" name="adminGENERAL" type="submit">Дать роль adminGENERAL @ViewData["Name"]</button>
+                                                    </li>
+                                                }
+                                                if (GetPriorityRole.GetP("admin", role, rolelocal))
+                                                {
+                                                    <li>
+                                                        <button id="@ViewData["Name"]" class="btn btn-success" name="admin" type="submit">Дать роль admin @ViewData["Name"]</button>
+                                                    </li>
+                                                }
+                                            }
+                                            else if (rolelocal == "adminGENERAL")
+                                            {
+                                                if (role != "adminGLOBAL" && role != rolelocal)
+                                                {
+                                                    <li>
+                                                        <button id="@ViewData["Name"]" class="btn btn-warning" value="del" type="submit">Понизить до обычного пользователя @ViewData["Name"]</button>
+                                                    </li>
+                                                }
+
+                                                if (role == "def")
+                                                {
+                                                    <li>
+                                                        <button id="@ViewData["Name"]" class="btn btn-success" name="admin" type="submit">Дать роль admin @ViewData["Name"]</button>
+                                                    </li>
+                                                }
+                                            }
+                                            else if (rolelocal == "admin")
+                                            {
+                                                if (role != "adminGLOBAL" && role != "def" && role != "adminGENERAL" && role != rolelocal)
+                                                {
+                                                    <li>
+                                                        <button id="@ViewData["Name"]" class="btn btn-warning" value="del" type="submit">Понизить до обычного пользователя @ViewData["Name"]</button>
+                                                    </li>
+                                                }
+                                            }
+                                        </ul>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                    </nav>
+                </div>
+            </div>
+        }
+
+        idxStart++;
+    }
+
+}
+
+<script src="~/js/userAdmin.js"></script>
+
+

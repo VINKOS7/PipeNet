@@ -1,0 +1,34 @@
+﻿@model LoginViewModel
+@{
+    ViewData["Title"] = "Вход";
+    //ViewData["TD"] = "Настоящий пельмень";
+}
+
+
+<form class="login"  method="post" asp-controller="Account" asp-action="Login" asp-route-returnUrl="@Model.ReturnUrl">
+    <div class="error" asp-validation-summary="All"></div>
+    <div>
+        <label for="login" asp-for="Email"></label>
+        <input type="text" id="login" asp-for="Email">
+        <span class="error" asp-validation-for="Email"></span>
+    </div>
+
+    <div>
+        <label for="password" asp-for="Password">Пароль:</label>
+        <input type="password" id="password" asp-for="Password">
+        <span class="error" asp-validation-for="Password"></span>
+    </div>
+    <div>
+        <label asp-for="RememberMe"></label>
+        <input asp-for="RememberMe" style="margin-top: 15px"/>
+    </div>
+
+    <p class="login-submit">
+        <button type="submit" class="login-button">Войти</button>
+    </p>
+
+    <p class="forgot-password">
+        <a asp-controller="Account" asp-action="ForgotPassword">Забыл пароль?</a>
+        <a asp-controller="Account" asp-action="Register">Регистрация</a>
+    </p>
+</form>

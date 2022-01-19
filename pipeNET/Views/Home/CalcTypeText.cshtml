@@ -1,0 +1,40 @@
+﻿@{
+    ViewData["Title"] = "Privacy Policy";
+}
+
+<div class="container-fluid">
+    <div class="text-center">
+        <h4>Здесь вы можете определить стиль речи текста, пока точность определения очень низка</h4>
+    </div>
+    <div class="row justify-content-center">
+        <div class="tab-content col-20 text-center">
+            <div class="tab-pane active" id="home" role="tabpanel" aria-labelledby="home-tab">
+                <div id="input-form">
+                    <span>Введите текст</span>
+                    <div class="input-group mt-1">
+                        <p><textarea rows="10" cols="70" id="text-input" name="text"></textarea></p>
+                    </div>
+                </div>
+                <div class="text-center mt-3">
+                    <a class="btn btn-success pl-5 pr-5" data-toggle="tab" href="#success" role="tab"
+                       aria-controls="middle" aria-selected="false">Далее</a>
+                </div>
+            </div>
+            <div class="tab-pane" id="success" role="tabpanel" aria-labelledby="success-tab">
+                <span id="result"></span>
+                <div id="input-form">
+                    <span>Перевод</span>
+                    <div class="input-group mt-1">
+                        <p><textarea readonly="readonly" rows="10" cols="70" id="text-output" name="translate"></textarea></p>
+                    </div>
+                </div>
+                <div class="text-center mt-3">
+                    <a class="btn btn-success pl-5 pr-5" data-toggle="tab" href="#home" role="tab"
+                       aria-controls="home" aria-selected="false">Заново</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script src="~/js/CalcTypeText.js"></script>
